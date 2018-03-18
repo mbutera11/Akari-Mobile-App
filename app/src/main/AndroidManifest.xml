@@ -19,7 +19,7 @@
         <activity android:name=".Listings" />
         <activity android:name=".Properties" />
         <activity android:name=".Profile" />
-        <activity android:name=".LoginLogout"></activity>
+        <activity android:name=".Login"></activity>
     </application>
 
 </manifest>

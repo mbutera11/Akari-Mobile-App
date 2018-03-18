@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 this.startActivity(intent);
                 break;
             case R.id.login:
-                intent = new Intent(this, LoginLogout.class);
+                intent = new Intent(this, Login.class);
                 this.startActivity(intent);
                 break;
             default:
