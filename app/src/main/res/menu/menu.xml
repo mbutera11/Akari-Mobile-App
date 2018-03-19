@@ -13,5 +13,8 @@
         android:title="Profile" />
     <item
         android:id="@+id/login"
-        android:title="Login/Logout" />
+        android:title="Login" />
+    <item
+        android:id="@+id/register"
+        android:title="Register" />
 </menu>

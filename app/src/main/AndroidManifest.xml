@@ -19,7 +19,9 @@
         <activity android:name=".Listings" />
         <activity android:name=".Properties" />
         <activity android:name=".Profile" />
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
+        <activity android:name=".Register" />
+        <activity android:name=".ListingDetails"></activity>
     </application>
 
 </manifest>

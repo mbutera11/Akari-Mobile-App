@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, Login.class);
                 this.startActivity(intent);
                 break;
+            case R.id.register:
+                intent = new Intent(this, Register.class);
+                this.startActivity(intent);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
