@@ -21,7 +21,8 @@
         <activity android:name=".Profile" />
         <activity android:name=".Login" />
         <activity android:name=".Register" />
-        <activity android:name=".ListingDetails"></activity>
+        <activity android:name=".ListingDetails" />
+        <activity android:name=".postProperty"></activity>
     </application>
 
 </manifest>
