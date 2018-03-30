@@ -6,10 +6,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -22,8 +21,7 @@ public class Login extends AppCompatActivity {
 
     protected EditText email;
     protected EditText password;
-    protected Button loginButton;
-    protected TextView firstName;
+    private Session s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +29,14 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getSupportActionBar().setTitle("Login");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // if the user does not have a session, they can be in the login activity
+        // if not, direct them to the profile page.
+        s = new Session(this);
+        if(!s.getEmail().equals("")) {
+            startActivity(new Intent(this, Profile.class));
+        }
+
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
@@ -53,7 +59,7 @@ public class Login extends AppCompatActivity {
 
 
     // subclass that executed the login script on the server via POST
-    private class LoginAction extends AsyncTask<String, Integer, String > {
+    private class LoginAction extends AsyncTask<String, Integer, String> {
 
         private Context context;
 
@@ -72,8 +78,11 @@ public class Login extends AppCompatActivity {
                 String email = arg0[0];
                 String password = arg0[1];
 
-                // link to the script
-                String link="http://10.0.1.38/Code/Mobile_App_Scripts/loginMobile.php";
+                // link to local script
+                String link = "http://10.0.1.38/Code/Mobile_App_Scripts/loginMobile.php";
+
+                // link to script on server
+                // String link = "http://akari.alsolaim.com/Mobile_App_Scripts/loginMobile.php";
 
                 // encode the email and password to pass to the script via POSt
                 String data  = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
@@ -121,11 +130,18 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
 
             // if email is registered and password is correct, login is successful
+            // start session and store their info
             // send user to profile page
             } else {
+                String[] allInfo = result.split(",");
+                Session s = new Session(getApplicationContext());
+                s.setFirstName(allInfo[1]);
+                s.setLastName(allInfo[2]);
+                s.setEmail(allInfo[3]);
+
                 Intent in = new Intent(getApplicationContext(), Profile.class);
-                in.putExtra("FirstName", result);
                 startActivity(in);
+
             }
         }
     }

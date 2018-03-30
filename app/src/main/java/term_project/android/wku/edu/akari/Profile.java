@@ -9,9 +9,13 @@ import android.widget.TextView;
 
 public class Profile extends AppCompatActivity {
 
+    protected Session s;
+
     protected Button properties;
     protected Button postProperty;
     protected TextView firstName;
+    protected TextView lastName;
+    protected TextView email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +24,18 @@ public class Profile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Your Profile");
 
+        s = new Session(getApplicationContext());
+
+        firstName = findViewById(R.id.firstName);
+        firstName.setText(s.getFirstName());
+        lastName = findViewById(R.id.lastName);
+        lastName.setText(s.getLastName());
+        email = findViewById(R.id.email);
+        email.setText(s.getEmail());
+
+
         properties = findViewById(R.id.properties);
         postProperty = findViewById(R.id.postProperty);
-
-        // testing login with this--------------------
-        firstName = findViewById(R.id.firstName);
-        firstName.setText(getIntent().getStringExtra("FirstName"));
 
         properties.setOnClickListener(new View.OnClickListener() {
             @Override
