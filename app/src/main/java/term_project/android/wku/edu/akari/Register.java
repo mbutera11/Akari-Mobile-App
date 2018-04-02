@@ -53,6 +53,9 @@ public class Register extends AppCompatActivity {
         String passwordText = password.getText().toString();
         String passConfirmText = passConfirm.getText().toString();
 
+        // check to see if password and confirm password text match
+        // if match, continue with register
+        // if not match, toast message
         if(passwordText.equals(passConfirmText)) {
             String firstNameText = firstName.getText().toString();
             String lastNameText = lastName.getText().toString();
@@ -73,7 +76,7 @@ public class Register extends AppCompatActivity {
         return true;
     }
 
-    // subclass that executed the reguster script on the server via POST
+    // subclass that executed the register script on the server via POST
     private class RegisterAction extends AsyncTask<String, Integer, String> {
 
         private Context context;
@@ -153,7 +156,7 @@ public class Register extends AppCompatActivity {
                 // account created
             } else {
                 String[] allInfo = result.split(",");
-                Session s = new Session(getApplicationContext());
+                s = new Session(getApplicationContext());
                 s.setFirstName(allInfo[0]);
                 s.setLastName(allInfo[1]);
                 s.setEmail(allInfo[2]);
