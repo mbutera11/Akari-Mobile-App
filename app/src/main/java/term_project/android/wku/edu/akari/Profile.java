@@ -5,16 +5,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Profile extends AppCompatActivity {
+
+    protected Session s;
+
+    protected Button properties;
+    protected Button postProperty;
+    protected TextView firstName;
+    protected TextView lastName;
+    protected TextView email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Button properties = (Button)findViewById(R.id.properties);
-        Button postProperty = (Button)findViewById(R.id.postProperty);
+        getSupportActionBar().setTitle("Your Profile");
+
+        s = new Session(getApplicationContext());
+
+        firstName = findViewById(R.id.firstName);
+        firstName.setText(s.getFirstName());
+        lastName = findViewById(R.id.lastName);
+        lastName.setText(s.getLastName());
+        email = findViewById(R.id.email);
+        email.setText(s.getEmail());
+
+
+        properties = findViewById(R.id.properties);
+        postProperty = findViewById(R.id.postProperty);
 
         properties.setOnClickListener(new View.OnClickListener() {
             @Override
