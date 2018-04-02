@@ -79,10 +79,10 @@ public class Login extends AppCompatActivity {
                 String password = arg0[1];
 
                 // link to local script
-                String link = "http://10.0.1.38/Code/Mobile_App_Scripts/loginMobile.php";
+                //String link = "http://10.0.1.38/Code/Mobile_App_Scripts/loginMobile.php";
 
                 // link to script on server
-                // String link = "http://akari.alsolaim.com/Mobile_App_Scripts/loginMobile.php";
+                String link = "http://akari.alsolaim.com/Mobile_App_Scripts/loginMobile.php";
 
                 // encode the email and password to pass to the script via POSt
                 String data  = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
