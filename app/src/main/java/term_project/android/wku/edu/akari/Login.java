@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
@@ -22,6 +23,7 @@ public class Login extends AppCompatActivity {
     protected EditText email;
     protected EditText password;
     private Session s;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class Login extends AppCompatActivity {
             startActivity(new Intent(this, Profile.class));
         }
 
+        progressBar = findViewById(R.id.progressBar);
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
@@ -47,6 +50,7 @@ public class Login extends AppCompatActivity {
     public void login(View view) {
         String emailText = email.getText().toString();
         String passwordText = password.getText().toString();
+
         // new instance of the subclass, execute it
         new LoginAction(this).execute(emailText, passwordText);
     }
@@ -68,6 +72,8 @@ public class Login extends AppCompatActivity {
         }
 
         protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+
         }
 
         // communication happens here
@@ -104,6 +110,7 @@ public class Login extends AppCompatActivity {
                 StringBuilder sb = new StringBuilder();
                 String line = null;
 
+
                 // Read Server Response and append to string builder
                 while((line = reader.readLine()) != null) {
                     sb.append(line);
@@ -121,6 +128,9 @@ public class Login extends AppCompatActivity {
         // will take appropriate actions depending on the server response
         @Override
         protected void onPostExecute(String result) {
+
+            progressBar.setVisibility(View.GONE);
+
             // toast email not registered if that is the script output
             if(result.equals("Email is not Registered")) {
                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();

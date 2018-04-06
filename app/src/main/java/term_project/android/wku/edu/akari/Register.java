@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -26,6 +27,7 @@ public class Register extends AppCompatActivity {
     protected EditText passConfirm;
 
     protected Button register;
+    private ProgressBar progressBar;
 
     private Session s;
 
@@ -44,6 +46,7 @@ public class Register extends AppCompatActivity {
         passConfirm = findViewById(R.id.passConfirm);
 
         register = findViewById(R.id.register);
+        progressBar = findViewById(R.id.progressBar);
 
 
     }
@@ -86,6 +89,7 @@ public class Register extends AppCompatActivity {
         }
 
         protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         // communication happens here
@@ -144,6 +148,8 @@ public class Register extends AppCompatActivity {
         // will take appropriate actions depending on the server response
         @Override
         protected void onPostExecute(String result) {
+
+            progressBar.setVisibility(View.INVISIBLE);
 
             // toast email not registered if that is the script output
             if(result.equals("Failed to connect")) {
