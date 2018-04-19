@@ -57,7 +57,11 @@ public class ListingListAdapter extends ArrayAdapter{
         numBedText.setText(numBedArray[position] + " Bedrooms");
         streetText.setText(addressArray[position]);
         locationText.setText(cityArray[position] + ", " + stateArray[position] + " " + zipArray[position]);
-        imageView.setImageResource(imageIDarray[position]);
+
+        // used for testing
+
+        //imageView.setImageResource(imageIDarray[position]);
+        imageView.setImageResource(R.drawable.noimage);
 
         return rowView;
 
