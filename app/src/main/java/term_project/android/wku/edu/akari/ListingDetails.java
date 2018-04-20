@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -157,25 +158,31 @@ public class ListingDetails extends AppCompatActivity {
 
             // get string from array list and split it by colon
             String info = strings.get(0);
-            String[] propertyInfo = info.split(":");
 
-            // set variable to corresponding index from server response
-            String address = propertyInfo[4];
-            String price = "$"+propertyInfo[14];
-            String description = propertyInfo[12];
-            String problems = propertyInfo[17];
-            String type = propertyInfo[8];
-            String available = propertyInfo[15];
-            String construction = propertyInfo[16];
-            String cityStateZip = propertyInfo[5] + ", " + propertyInfo[6] + " " + propertyInfo[7];
-            String country = propertyInfo[3];
-            String size = propertyInfo[9];
-            String bedrooms = propertyInfo[10];
-            String bathrooms = propertyInfo[11];
+            // if list is null, there is a connection issue
+            // else, continue with the operations
+            if(info == null) {
+                Toast.makeText(getApplicationContext(), "Failed to connect. Check internet connection", Toast.LENGTH_LONG).show();
+            } else {
+                String[] propertyInfo = info.split(":");
 
+                // set variable to corresponding index from server response
+                String address = propertyInfo[4];
+                String price = "$" + propertyInfo[14];
+                String description = propertyInfo[12];
+                String problems = propertyInfo[17];
+                String type = propertyInfo[8];
+                String available = propertyInfo[15];
+                String construction = propertyInfo[16];
+                String cityStateZip = propertyInfo[5] + ", " + propertyInfo[6] + " " + propertyInfo[7];
+                String country = propertyInfo[3];
+                String size = propertyInfo[9];
+                String bedrooms = propertyInfo[10];
+                String bathrooms = propertyInfo[11];
 
-            // call this method to set all text views in the page with info gathered from string array
-            setTextViews(address, price, description, problems, type, available, construction, cityStateZip, country, size, bedrooms, bathrooms);
+                // call this method to set all text views in the page with info gathered from string array
+                setTextViews(address, price, description, problems, type, available, construction, cityStateZip, country, size, bedrooms, bathrooms);
+            }
 
         }
 

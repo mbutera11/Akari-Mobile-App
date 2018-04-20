@@ -93,7 +93,12 @@ public class MainActivity extends AppCompatActivity {
 
     // if user is logged in, show loggedin_menu
     // else show loggedout_menu
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        // forces the menu to update
+        // allows for two different menus when the user is logged in or not
+        invalidateOptionsMenu();
+
         MenuInflater inflater = getMenuInflater();
 
         if(!s.getEmail().equals("")) {

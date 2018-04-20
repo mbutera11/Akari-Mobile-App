@@ -150,18 +150,12 @@ public class Register extends AppCompatActivity {
         protected void onPostExecute(String result) {
 
             progressBar.setVisibility(View.INVISIBLE);
+            String[] allInfo = result.split(",");
 
-            // toast email not registered if that is the script output
-            if(result.equals("Failed to connect")) {
-                Toast.makeText(getApplicationContext(), "Failed to Connect to Server ... Check Connection", Toast.LENGTH_LONG).show();
-
-                // toast username exists
-            } else if(result.equals("Username already exists")) {
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-
-                // account created
+            // if first element in array is an exception, no internet connection toast message
+            if(allInfo[0].equals("Exception: Unable to resolve host \"akari.alsolaim.com\": No address associated with hostname")) {
+                Toast.makeText(getApplicationContext(), "No Connection. Check internet connection", Toast.LENGTH_LONG).show();
             } else {
-                String[] allInfo = result.split(",");
                 s = new Session(getApplicationContext());
                 s.setFirstName(allInfo[0]);
                 s.setLastName(allInfo[1]);
@@ -169,8 +163,8 @@ public class Register extends AppCompatActivity {
 
                 Intent in = new Intent(getApplicationContext(), Profile.class);
                 startActivity(in);
-
             }
+
         }
     }
 }

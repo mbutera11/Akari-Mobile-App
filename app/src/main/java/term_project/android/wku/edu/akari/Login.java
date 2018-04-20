@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -144,13 +145,19 @@ public class Login extends AppCompatActivity {
             // send user to profile page
             } else {
                 String[] allInfo = result.split(",");
-                Session s = new Session(getApplicationContext());
-                s.setFirstName(allInfo[1]);
-                s.setLastName(allInfo[2]);
-                s.setEmail(allInfo[3]);
 
-                Intent in = new Intent(getApplicationContext(), Profile.class);
-                startActivity(in);
+                // if first element in array is an exception, no internet connection toast message
+                if(allInfo[0].equals("Exception: Unable to resolve host \"akari.alsolaim.com\": No address associated with hostname")) {
+                    Toast.makeText(getApplicationContext(), "No Connection. Check internet connection", Toast.LENGTH_LONG).show();
+                } else {
+                    Session s = new Session(getApplicationContext());
+                    s.setFirstName(allInfo[1]);
+                    s.setLastName(allInfo[2]);
+                    s.setEmail(allInfo[3]);
+
+                    Intent in = new Intent(getApplicationContext(), Profile.class);
+                    startActivity(in);
+                }
 
             }
         }

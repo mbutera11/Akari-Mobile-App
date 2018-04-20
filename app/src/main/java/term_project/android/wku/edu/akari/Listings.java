@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -56,24 +57,28 @@ public class Listings extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        // if arrays are null, there was a connection issue
+        if(priceArray == null) {
+            Toast.makeText(getApplicationContext(), "Failed to connect. Check internet connection.", Toast.LENGTH_LONG).show();
+        } else {
+            // creating custom list with custom adapter
+            ListingListAdapter lla = new ListingListAdapter(this, imageIDarray, priceArray, numBedArray, addressArray, cityArray, stateArray, zipArray);
+            lv = findViewById(R.id.listView1);
+            lv.setAdapter(lla);
 
-        // creating custom list with custom adapter
-        ListingListAdapter lla = new ListingListAdapter(this, imageIDarray, priceArray, numBedArray, addressArray, cityArray, stateArray, zipArray);
-        lv = findViewById(R.id.listView1);
-        lv.setAdapter(lla);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent in = new Intent(Listings.this, ListingDetails.class);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent in = new Intent(Listings.this, ListingDetails.class);
+                    // send over whatever information is needed
+                    in.putExtra("PropertyID", propertyID[position]);
 
-                // send over whatever information is needed
-                in.putExtra("PropertyID", propertyID[position]);
-
-                startActivity(in);
-                finish();
-            }
-        });
+                    startActivity(in);
+                    finish();
+                }
+            });
+        }
 
     }
 
@@ -82,34 +87,41 @@ public class Listings extends AppCompatActivity {
         // Array List that holds result of the AsyncTask
         // .get() is what returns the results
         ArrayList<String> list = new getPropertyInfo().execute().get();
-        String s;
-        String[] propertyInfo;
 
-        // initialize each array with the length of the list (number of properties in DB)
-        priceArray = new String[list.size()];
-        numBedArray = new String[list.size()];
-        addressArray = new String[list.size()];
-        cityArray = new String[list.size()];
-        stateArray = new String[list.size()];
-        zipArray = new String[list.size()];
-        propertyID = new String[list.size()];
 
-        // iterate through properties from DB and assign values accordingly
-        for(int i = 0; i < list.size(); i++) {
-            s = list.get(i);
-            // all info is split by a colon
-            propertyInfo = s.split(":");
+        // if list is null, connection issue
+        // else, continue operation
+        if(list == null) {
+            Toast.makeText(getApplicationContext(), "Failed to connect. Check internet connection.", Toast.LENGTH_LONG).show();
+        } else {
+            String s;
+            String[] propertyInfo;
 
-            // assign values that correspond with output from server
-            priceArray[i] = propertyInfo[14];
-            numBedArray[i] = propertyInfo[10];
-            addressArray[i] = propertyInfo[4];
-            cityArray[i] = propertyInfo[5];
-            stateArray[i] = propertyInfo[6];
-            zipArray[i] = propertyInfo[7];
-            propertyID[i] = propertyInfo[0];
+            // initialize each array with the length of the list (number of properties in DB)
+            priceArray = new String[list.size()];
+            numBedArray = new String[list.size()];
+            addressArray = new String[list.size()];
+            cityArray = new String[list.size()];
+            stateArray = new String[list.size()];
+            zipArray = new String[list.size()];
+            propertyID = new String[list.size()];
+
+            // iterate through properties from DB and assign values accordingly
+            for (int i = 0; i < list.size(); i++) {
+                s = list.get(i);
+                // all info is split by a colon
+                propertyInfo = s.split(":");
+
+                // assign values that correspond with output from server
+                priceArray[i] = propertyInfo[14];
+                numBedArray[i] = propertyInfo[10];
+                addressArray[i] = propertyInfo[4];
+                cityArray[i] = propertyInfo[5];
+                stateArray[i] = propertyInfo[6];
+                zipArray[i] = propertyInfo[7];
+                propertyID[i] = propertyInfo[0];
+            }
         }
-
 
     }
 
