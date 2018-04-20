@@ -53,20 +53,27 @@ public class Register extends AppCompatActivity {
 
     public void register(View view) {
 
-        String passwordText = password.getText().toString();
-        String passConfirmText = passConfirm.getText().toString();
-
-        // check to see if password and confirm password text match
-        // if match, continue with register
-        // if not match, toast message
-        if(passwordText.equals(passConfirmText)) {
-            String firstNameText = firstName.getText().toString();
-            String lastNameText = lastName.getText().toString();
-            String emailText = email.getText().toString();
-            new RegisterAction(this).execute(firstNameText, lastNameText, emailText, passwordText);
-
+        // all edit texts are required
+        if(firstName.getText().toString().equals("") || lastName.getText().toString().equals("") || email.getText().toString().equals("")
+                || password.getText().toString().equals("") || passConfirm.getText().toString().equals("")) {
+            Toast.makeText(getApplicationContext(), "All boxes are required", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show();
+
+            String passwordText = password.getText().toString();
+            String passConfirmText = passConfirm.getText().toString();
+
+            // check to see if password and confirm password text match
+            // if match, continue with register
+            // if not match, toast message
+            if (passwordText.equals(passConfirmText)) {
+                String firstNameText = firstName.getText().toString();
+                String lastNameText = lastName.getText().toString();
+                String emailText = email.getText().toString();
+                new RegisterAction(this).execute(firstNameText, lastNameText, emailText, passwordText);
+
+            } else {
+                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show();
+            }
         }
 
     }
