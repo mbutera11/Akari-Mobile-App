@@ -6,4 +6,38 @@
     android:layout_height="match_parent"
     tools:context="term_project.android.wku.edu.akari.AddPictureActivity">
 
+    <ImageView
+        android:id="@+id/image1"
+        android:layout_width="223dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="65dp"
+        android:layout_marginTop="46dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/takePic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/takePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="68dp"
+        android:text="Take a Picture"
+        app:layout_constraintBottom_toTopOf="@+id/upload"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image1" />
+
+    <Button
+        android:id="@+id/upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="41dp"
+        android:text="Upload for Property"
+        android:onClick="upload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/takePic" />
 </android.support.constraint.ConstraintLayout>

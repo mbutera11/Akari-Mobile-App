@@ -22,5 +22,6 @@
             android:layout_alignParentTop="true"
             android:adjustViewBounds="true"
             app:srcCompat="@drawable/akari" />
+
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
