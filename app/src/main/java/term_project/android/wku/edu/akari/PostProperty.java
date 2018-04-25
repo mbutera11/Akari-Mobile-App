@@ -194,15 +194,18 @@ public class PostProperty extends AppCompatActivity {
 
             if(s.equals("FAIL")) {
                 Toast.makeText(getApplicationContext(), "Property was not inserted. Try again.", Toast.LENGTH_LONG).show();
-            } else if(s.equals("Insert Successful")) {
-                Toast.makeText(getApplicationContext(), "Property was inserted.", Toast.LENGTH_LONG).show();
-                Intent in = new Intent(getApplicationContext(), Listings.class);
-                startActivity(in);
             } else if(s.equals("Failed to connect")) {
                 Toast.makeText(getApplicationContext(), "Unable to connect to database", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
-            }
+                Toast.makeText(getApplicationContext(), "Property was inserted. Add a picture", Toast.LENGTH_LONG).show();
+                Intent in = new Intent(getApplicationContext(), AddPictureActivity.class);
+                String[] propUserID = s.split(",");
+
+                // send user and property id from server to next activity
+                in.putExtra("userID", propUserID[0]);
+                in.putExtra("propertyID", propUserID[1]);
+
+                startActivity(in);            }
         }
     }
 

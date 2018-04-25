@@ -59,7 +59,7 @@ public class Listings extends AppCompatActivity {
 
         // if arrays are null, there was a connection issue
         if(priceArray == null) {
-            Toast.makeText(getApplicationContext(), "Failed to connect. Check internet connection.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Failed to connect or there are no properties", Toast.LENGTH_LONG).show();
         } else {
             // creating custom list with custom adapter
             ListingListAdapter lla = new ListingListAdapter(this, imageIDarray, priceArray, numBedArray, addressArray, cityArray, stateArray, zipArray);
@@ -90,9 +90,12 @@ public class Listings extends AppCompatActivity {
 
 
         // if list is null, connection issue
+        // if first element in list is there are no properties, toast message
         // else, continue operation
         if(list == null) {
             Toast.makeText(getApplicationContext(), "Failed to connect. Check internet connection.", Toast.LENGTH_LONG).show();
+        } else if(list.get(0).equals("There are no properties")) {
+            Toast.makeText(getApplicationContext(), "There are no properties", Toast.LENGTH_LONG).show();
         } else {
             String s;
             String[] propertyInfo;

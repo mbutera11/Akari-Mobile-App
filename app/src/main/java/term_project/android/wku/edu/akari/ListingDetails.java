@@ -155,7 +155,7 @@ public class ListingDetails extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<String> strings) {
             super.onPostExecute(strings);
-
+            
             // get string from array list and split it by colon
             String info = strings.get(0);
 
