@@ -25,6 +25,7 @@ public class Register extends AppCompatActivity {
     protected EditText email;
     protected EditText password;
     protected EditText passConfirm;
+    protected EditText phone;
 
     protected Button register;
     private ProgressBar progressBar;
@@ -42,6 +43,7 @@ public class Register extends AppCompatActivity {
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         email = findViewById(R.id.email);
+        phone = findViewById(R.id.phone);
         password = findViewById(R.id.password);
         passConfirm = findViewById(R.id.passConfirm);
 
@@ -55,7 +57,7 @@ public class Register extends AppCompatActivity {
 
         // all edit texts are required
         if(firstName.getText().toString().equals("") || lastName.getText().toString().equals("") || email.getText().toString().equals("")
-                || password.getText().toString().equals("") || passConfirm.getText().toString().equals("")) {
+                || password.getText().toString().equals("") || passConfirm.getText().toString().equals("") || phone.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "All boxes are required", Toast.LENGTH_LONG).show();
         } else {
 
@@ -69,7 +71,8 @@ public class Register extends AppCompatActivity {
                 String firstNameText = firstName.getText().toString();
                 String lastNameText = lastName.getText().toString();
                 String emailText = email.getText().toString();
-                new RegisterAction(this).execute(firstNameText, lastNameText, emailText, passwordText);
+                String phoneText = phone.getText().toString();
+                new RegisterAction(this).execute(firstNameText, lastNameText, emailText, phoneText, passwordText);
 
             } else {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show();
@@ -108,7 +111,8 @@ public class Register extends AppCompatActivity {
                 String firstName = arg0[0];
                 String lastName = arg0[1];
                 String email = arg0[2];
-                String password = arg0[3];
+                String phone = arg0[3];
+                String password = arg0[4];
 
                 // link to local script
                 //String link = "http://10.0.1.38/Code/Mobile_App_Scripts/registerMobile.php";
@@ -120,6 +124,7 @@ public class Register extends AppCompatActivity {
                 String data  = URLEncoder.encode("firstName", "UTF-8") + "=" + URLEncoder.encode(firstName, "UTF-8");
                 data += "&" + URLEncoder.encode("lastName", "UTF-8") + "=" + URLEncoder.encode(lastName, "UTF-8");
                 data += "&" + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+                data += "&" + URLEncoder.encode("phone", "UTF-8") + "=" + URLEncoder.encode(phone, "UTF-8");
                 data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
 
                 // create a URL with the link
@@ -166,7 +171,7 @@ public class Register extends AppCompatActivity {
                 s = new Session(getApplicationContext());
                 s.setFirstName(allInfo[0]);
                 s.setLastName(allInfo[1]);
-                s.setEmail(allInfo[2]);
+                s.setEmail(allInfo[3]);
 
                 Intent in = new Intent(getApplicationContext(), Profile.class);
                 startActivity(in);
