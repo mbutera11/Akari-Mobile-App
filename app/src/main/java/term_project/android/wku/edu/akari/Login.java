@@ -153,7 +153,7 @@ public class Login extends AppCompatActivity {
                     Session s = new Session(getApplicationContext());
                     s.setFirstName(allInfo[1]);
                     s.setLastName(allInfo[2]);
-                    s.setEmail(allInfo[3]);
+                    s.setEmail(allInfo[4]);
 
                     Intent in = new Intent(getApplicationContext(), Profile.class);
                     startActivity(in);

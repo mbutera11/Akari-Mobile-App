@@ -46,7 +46,7 @@ public class Profile extends AppCompatActivity {
         postProperty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, postProperty.class));
+                startActivity(new Intent(Profile.this, PostProperty.class));
             }
         });
     }
