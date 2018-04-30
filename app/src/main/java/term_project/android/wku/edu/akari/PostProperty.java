@@ -204,7 +204,7 @@ public class PostProperty extends AppCompatActivity {
                 // send user and property id from server to next activity
                 in.putExtra("userID", propUserID[0]);
                 in.putExtra("propertyID", propUserID[1]);
-
+                finish();
                 startActivity(in);            }
         }
     }

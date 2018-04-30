@@ -42,12 +42,9 @@ public class AddPictureActivity extends AppCompatActivity {
         upload = findViewById(R.id.upload);
         image = findViewById(R.id.image1);
 
-        //userID = getIntent().getStringExtra("userID");
-        //propID = getIntent().getStringExtra("propertyID");
+        userID = getIntent().getStringExtra("userID");
+        propID = getIntent().getStringExtra("propertyID");
 
-        // hard coded for testing
-        userID = "14";
-        propID = "12";
 
         takePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +140,7 @@ public class AddPictureActivity extends AppCompatActivity {
             // else, something went wrong.
             if(s.equals("UPLOADED")) {
                 Toast.makeText(getApplicationContext(), "Your picture was successfully uploaded and property was posted", Toast.LENGTH_LONG).show();
+                finish();
                 startActivity(new Intent(getApplicationContext(), Listings.class));
             } else {
                 Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();

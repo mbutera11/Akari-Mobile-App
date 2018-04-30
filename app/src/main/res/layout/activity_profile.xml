@@ -4,78 +4,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="term_project.android.wku.edu.akari.Profile">
+    tools:context="term_project.android.wku.edu.akari.Profile"
+    tools:layout_editor_absoluteY="81dp">
 
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="170dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="100dp"
-        android:text="email@email.com"
-        android:textSize="20sp"
+    <LinearLayout
+        android:layout_width="204dp"
+        android:layout_height="102dp"
+        android:layout_marginBottom="97dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/postProperty"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profilePicture"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/lastName"
-        android:layout_width="170dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="60dp"
-        android:text="lastname"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/profilePicture"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/firstName"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:layout_marginBottom="15px"
+            android:text="firstname"
+            android:textAlignment="textEnd"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <TextView
+            android:id="@+id/lastName"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:layout_marginBottom="15px"
+            android:text="lastname"
+            android:textAlignment="textEnd"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="60dp" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:layout_marginBottom="15px"
+            android:text="email@email.com"
+            android:textAlignment="textEnd"
+            android:textSize="14sp"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="100dp" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/profilePicture"
         android:layout_width="136dp"
         android:layout_height="138dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/firstName"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/noimage" />
-
-    <Button
-        android:id="@+id/editProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="58dp"
-        android:text="Edit Profile"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profilePicture" />
 
     <Button
         android:id="@+id/postProperty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="31dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginStart="119dp"
+        android:layout_marginTop="77dp"
         android:text="Post a Property"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editProfile" />
-
-    <TextView
-        android:id="@+id/firstName"
-        android:layout_width="170dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="firstname"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/profilePicture"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/properties"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePicture" />
 
     <Button
         android:id="@+id/properties"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginBottom="29dp"
+        android:layout_marginEnd="119dp"
+        android:layout_marginStart="119dp"
+        android:layout_marginTop="31dp"
         android:text="Your Properties"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tenency"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postProperty" />
+
+    <Button
+        android:id="@+id/tenency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="76dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="29dp"
+        android:text="Start Tenency"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/properties" />
+
 </android.support.constraint.ConstraintLayout>

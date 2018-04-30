@@ -22,15 +22,6 @@ public class Listings extends AppCompatActivity {
     // later will need to populate these from a database
     Integer[] imageIDarray = {};
 
-    // Used for testing
-
-//    String[] priceArray = {"1000", "1250"};
-//    String[] numBedArray = {"3", "5"};
-//    String[] addressArray = {"154 Waters Edge Lane", "1909 Creason Street"};
-//    String[] cityArray = {"Hendersonville", "Bowling Green"};
-//    String[] stateArray = {"TN", "KY"};
-//    String[] zipArray = {"37075", "42101"};
-
     protected String[] priceArray;
     protected String[] numBedArray;
     protected String[] addressArray;

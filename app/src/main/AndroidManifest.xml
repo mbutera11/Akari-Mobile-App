@@ -11,7 +11,8 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="false" />
 
     <application
@@ -54,7 +55,8 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".AddPictureActivity"></activity>
+        <activity android:name=".AddPictureActivity" />
+        <activity android:name=".StartTenency"></activity>
     </application>
 
 </manifest>

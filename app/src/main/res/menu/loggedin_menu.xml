@@ -3,10 +3,10 @@
 
     <item
         android:id="@+id/listings"
-        android:title="Listings" />
+        android:title="View All Properties" />
     <item
         android:id="@+id/properties"
-        android:title="Properties" />
+        android:title="Your Properties" />
     <item
         android:id="@+id/profile"
         android:title="Profile" />
