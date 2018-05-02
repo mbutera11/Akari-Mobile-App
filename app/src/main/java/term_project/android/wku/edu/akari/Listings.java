@@ -103,8 +103,9 @@ public class Listings extends AppCompatActivity {
             // iterate through properties from DB and assign values accordingly
             for (int i = 0; i < list.size(); i++) {
                 s = list.get(i);
+
                 // all info is split by a colon
-                propertyInfo = s.split(":");
+                propertyInfo = s.split("~");
 
                 // assign values that correspond with output from server
                 priceArray[i] = propertyInfo[14];
