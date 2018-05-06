@@ -50,6 +50,7 @@ public class PostProperty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_property);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Post a Property");
 
         propName = findViewById(R.id.propertyName);
         country = findViewById(R.id.country);

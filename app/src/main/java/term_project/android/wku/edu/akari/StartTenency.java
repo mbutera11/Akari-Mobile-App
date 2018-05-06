@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -31,10 +32,14 @@ public class StartTenency extends AppCompatActivity {
 
     protected Button rental;
 
+    protected ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_tenency);
+        getSupportActionBar().setTitle("Start Tenancy");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         s = new Session(this);
         String userEmail = s.getEmail();
@@ -42,6 +47,7 @@ public class StartTenency extends AppCompatActivity {
         radioGroup = findViewById(R.id.rGroup);
         renterEmail = findViewById(R.id.renterEmail);
         contractDate = findViewById(R.id.contractDate);
+        progressBar = findViewById(R.id.progressBar2);
 
         new GetPropertyTenency().execute(userEmail);
 
@@ -52,11 +58,13 @@ public class StartTenency extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int radioID = radioGroup.getCheckedRadioButtonId();
+                RadioButton rb = findViewById(radioID);
                 // make sure all inputs have been written
                 if(renterEmail.getText().toString().equals("") || contractDate.getText().toString().equals("") || radioID == -1) {
                     Toast.makeText(getApplicationContext(), "All Fields are Required", Toast.LENGTH_LONG).show();
+                } else if(rb.getText().equals("There are no properties")) {
+                    Toast.makeText(getApplicationContext(), "You Have No Properties to Rent", Toast.LENGTH_LONG).show();
                 } else {
-                    RadioButton rb = findViewById(radioID);
                     new StartTenencyAction().execute(s.getEmail(), renterEmail.getText().toString(), contractDate.getText().toString(), (String) rb.getText());
                 }
             }
@@ -117,6 +125,7 @@ public class StartTenency extends AppCompatActivity {
 
             // get response from server, split it
             String addresses = strings.get(0);
+
             String[] seperate = addresses.split(":");
 
             // radio buttons that will be added to page
@@ -138,6 +147,12 @@ public class StartTenency extends AppCompatActivity {
 
     // async class to do the actual rental functionality
     private class StartTenencyAction extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+            rental.setVisibility(View.INVISIBLE);
+        }
 
         @Override
         protected String doInBackground(String... strings) {
@@ -192,14 +207,21 @@ public class StartTenency extends AppCompatActivity {
 
             // cases depending on server output
             if(s.equals("SUCCESS")) {
+                progressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(getApplicationContext(), "Rental was Successful", Toast.LENGTH_LONG).show();
                 finish();
                 startActivity(new Intent(getApplicationContext(), Profile.class));
             } else if(s.equals("FAIL")) {
+                progressBar.setVisibility(View.INVISIBLE);
+                rental.setVisibility(View.VISIBLE);
                 Toast.makeText(getApplicationContext(), "Something went wrong ... ", Toast.LENGTH_LONG).show();
             } else if(s.equals("NO RENTER")) {
+                progressBar.setVisibility(View.INVISIBLE);
+                rental.setVisibility(View.VISIBLE);
                 Toast.makeText(getApplicationContext(), "There is no valid user with that email", Toast.LENGTH_LONG).show();
             } else {
+                progressBar.setVisibility(View.INVISIBLE);
+                rental.setVisibility(View.VISIBLE);
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
             }
 
@@ -207,6 +229,12 @@ public class StartTenency extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
 }

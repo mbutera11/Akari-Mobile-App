@@ -5,7 +5,7 @@
         android:id="@+id/listings"
         android:title="View All Properties" />
     <item
-        android:id="@+id/properties"
+        android:id="@+id/propertiesMenu"
         android:title="Your Properties" />
     <item
         android:id="@+id/profile"

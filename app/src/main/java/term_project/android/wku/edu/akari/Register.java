@@ -173,7 +173,7 @@ public class Register extends AppCompatActivity {
                 s.setLastName(allInfo[1]);
                 s.setEmail(allInfo[2]);
 
-                Intent in = new Intent(getApplicationContext(), Profile.class);
+                Intent in = new Intent(getApplicationContext(), HomePage.class);
                 startActivity(in);
             }
 

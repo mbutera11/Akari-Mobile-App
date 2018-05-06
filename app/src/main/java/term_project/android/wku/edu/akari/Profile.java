@@ -13,6 +13,7 @@ public class Profile extends AppCompatActivity {
 
     protected Button properties;
     protected Button postProperty;
+    protected Button rentedProperty;
     protected Button startTenency;
     protected TextView firstName;
     protected TextView lastName;
@@ -38,6 +39,7 @@ public class Profile extends AppCompatActivity {
         properties = findViewById(R.id.properties);
         postProperty = findViewById(R.id.postProperty);
         startTenency = findViewById(R.id.tenency);
+        rentedProperty = findViewById(R.id.rentedProperties);
 
         properties.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +57,12 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Profile.this, StartTenency.class));
+            }
+        });
+        rentedProperty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), RentedProperties.class));
             }
         });
     }

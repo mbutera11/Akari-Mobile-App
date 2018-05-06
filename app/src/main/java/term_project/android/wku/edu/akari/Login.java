@@ -155,7 +155,7 @@ public class Login extends AppCompatActivity {
                     s.setLastName(allInfo[2]);
                     s.setEmail(allInfo[4]);
 
-                    Intent in = new Intent(getApplicationContext(), Profile.class);
+                    Intent in = new Intent(getApplicationContext(), HomePage.class);
                     startActivity(in);
                 }
 
