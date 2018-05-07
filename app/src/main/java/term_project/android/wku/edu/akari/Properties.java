@@ -45,6 +45,7 @@ public class Properties extends AppCompatActivity {
         setContentView(R.layout.activity_properties);
         getSupportActionBar().setTitle("Your Properties");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        overridePendingTransition(R.anim.in, R.anim.out);
 
         s = new Session(getApplicationContext());
 

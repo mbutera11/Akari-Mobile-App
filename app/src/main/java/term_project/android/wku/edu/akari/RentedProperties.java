@@ -43,6 +43,7 @@ public class RentedProperties extends AppCompatActivity {
         setContentView(R.layout.activity_rented_properties);
         getSupportActionBar().setTitle("Properties you Rent");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        overridePendingTransition(R.anim.in, R.anim.out);
 
         s = new Session(getApplicationContext());
 

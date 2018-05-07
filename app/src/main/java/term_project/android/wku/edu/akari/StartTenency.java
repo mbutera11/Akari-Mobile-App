@@ -43,6 +43,7 @@ public class StartTenency extends AppCompatActivity {
         setContentView(R.layout.activity_start_tenency);
         getSupportActionBar().setTitle("Start Tenancy");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        overridePendingTransition(R.anim.in, R.anim.out);
 
         s = new Session(this);
         String userEmail = s.getEmail();

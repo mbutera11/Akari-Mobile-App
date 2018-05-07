@@ -36,6 +36,7 @@ public class ListingDetails extends AppCompatActivity {
         setContentView(R.layout.activity_listing_details);
         getSupportActionBar().setTitle("Listing Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        overridePendingTransition(R.anim.in, R.anim.out);
 
         // get property ID from intent in the listings page
         String propertyID = getIntent().getStringExtra("PropertyID");

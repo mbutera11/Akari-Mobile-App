@@ -42,6 +42,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         getSupportActionBar().setTitle("Register");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        overridePendingTransition(R.anim.in, R.anim.out);
 
         // initialize all views
         firstName = findViewById(R.id.firstName);

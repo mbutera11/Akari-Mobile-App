@@ -28,6 +28,7 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Your Profile");
+        overridePendingTransition(R.anim.in, R.anim.out);
 
         s = new Session(getApplicationContext());
 

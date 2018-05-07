@@ -41,6 +41,7 @@ public class Listings extends AppCompatActivity {
         setContentView(R.layout.activity_listings);
         getSupportActionBar().setTitle("Available Listings");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        overridePendingTransition(R.anim.in, R.anim.out);
 
         try {
             populateArrays();

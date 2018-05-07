@@ -41,6 +41,7 @@ public class AddPictureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_picture);
         getSupportActionBar().setTitle("Add Image");
+        overridePendingTransition(R.anim.in, R.anim.out);
 
         takePic = findViewById(R.id.takePic);
         upload = findViewById(R.id.upload);

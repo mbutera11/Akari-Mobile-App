@@ -55,6 +55,8 @@ public class postProperty extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Post a Property");
 
+        overridePendingTransition(R.anim.in, R.anim.out);
+
         // initialize all textviews
         propName = findViewById(R.id.propertyName);
         country = findViewById(R.id.country);
