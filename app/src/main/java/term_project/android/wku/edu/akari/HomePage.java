@@ -1,3 +1,9 @@
+// Michael Butera
+// Tom Spencer
+
+// this is a pre build navigation drawer activity, some code was automatically generated
+// this activity replaced MainActivity and is the default activity
+
 package term_project.android.wku.edu.akari;
 
 import android.content.DialogInterface;
@@ -14,7 +20,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -30,12 +35,14 @@ public class HomePage extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // floating add button
+        // used for user to add property
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!s.getEmail().equals("")) {
-                    startActivity(new Intent(getApplicationContext(), PostProperty.class));
+                    startActivity(new Intent(getApplicationContext(), postProperty.class));
                 } else {
                     Snackbar.make(view, "Please log in to add property", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
@@ -43,6 +50,7 @@ public class HomePage extends AppCompatActivity
             }
         });
 
+        // auto generated
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -85,6 +93,7 @@ public class HomePage extends AppCompatActivity
     }
 
 
+    // auto generated
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -100,6 +109,8 @@ public class HomePage extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
+        // if user is logged in, handle those menu items
+        // else, handle logged out items
         if(!s.getEmail().equals("")) {
             switch (item.getItemId()) {
                 case R.id.allProperties:
@@ -107,7 +118,7 @@ public class HomePage extends AppCompatActivity
                     this.startActivity(intent);
                     break;
                 // hardcoded id because for some reason it wouldnt work for properties
-                case 2131231022:
+                case R.id.yourProperties:
                     Log.d("CHECK", "HERE");
                     intent = new Intent(this, Properties.class);
                     this.startActivity(intent);

@@ -1,3 +1,6 @@
+// Michael Butera
+// Tom Spencer
+
 package term_project.android.wku.edu.akari;
 
 import android.content.Intent;
@@ -20,8 +23,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class RentedProperties extends AppCompatActivity {
-    // later will need to populate these from a database
-    Integer[] imageIDarray = {};
+    protected String[] imageArray;
 
     protected String[] priceArray;
     protected String[] numBedArray;
@@ -57,7 +59,7 @@ public class RentedProperties extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Failed to connect or there are no properties", Toast.LENGTH_LONG).show();
         } else {
             // creating custom list with custom adapter
-            ListingListAdapter lla = new ListingListAdapter(this, imageIDarray, priceArray, numBedArray, addressArray, cityArray, stateArray, zipArray);
+            ListingListAdapter lla = new ListingListAdapter(this, imageArray, priceArray, numBedArray, addressArray, cityArray, stateArray, zipArray);
             lv = findViewById(R.id.listView1);
             lv.setAdapter(lla);
 
@@ -104,12 +106,18 @@ public class RentedProperties extends AppCompatActivity {
             stateArray = new String[list.size()];
             zipArray = new String[list.size()];
             propertyID = new String[list.size()];
+            imageArray = new String[list.size()];
 
             // iterate through properties from DB and assign values accordingly
             for (int i = 0; i < list.size(); i++) {
                 s = list.get(i);
+
+                Log.d("BROKE", s);
+
                 // all info is split by a colon
-                propertyInfo = s.split(":");
+                propertyInfo = s.split("~");
+
+                Log.d("BROKE", "BROKE: " +propertyInfo[0]);
 
                 // assign values that correspond with output from server
                 priceArray[i] = propertyInfo[14];
@@ -119,6 +127,7 @@ public class RentedProperties extends AppCompatActivity {
                 stateArray[i] = propertyInfo[6];
                 zipArray[i] = propertyInfo[7];
                 propertyID[i] = propertyInfo[0];
+                imageArray[i] = propertyInfo[22];
             }
         }
 

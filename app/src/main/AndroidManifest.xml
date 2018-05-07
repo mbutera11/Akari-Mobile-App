@@ -32,7 +32,7 @@
             android:name=".Register"
             android:noHistory="true" />
         <activity android:name=".ListingDetails" />
-        <activity android:name=".PostProperty" />
+        <activity android:name=".postProperty" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

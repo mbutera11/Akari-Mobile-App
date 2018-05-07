@@ -1,3 +1,6 @@
+// Michael Butera
+// Tom Spencer
+
 package term_project.android.wku.edu.akari;
 
 import android.content.Context;
@@ -5,6 +8,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -59,13 +63,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
 
-        // add marker with the location lat, long coordinates
-        // also sets title of marker to the name passed from the main activity and shows it
-        Marker marker = mMap.addMarker(new MarkerOptions().position(location).title(address));
-        marker.showInfoWindow();
+        // if location is null still after the getCoordinates call, the address was not correctly added, toast message
+        // else, add marker and show on the map
+        if(location == null) {
+            Toast.makeText(this, "The owner did not input the address correctly. Check back at a later time", Toast.LENGTH_LONG).show();
+        } else {
+            // add marker with the location lat, long coordinates
+            // also sets title of marker to the name passed from the main activity and shows it
+            Marker marker = mMap.addMarker(new MarkerOptions().position(location).title(address));
+            marker.showInfoWindow();
 
-        // moves camera to the location and sets zoom to 15
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+            // moves camera to the location and sets zoom to 15
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+        }
     }
 
 
@@ -85,15 +95,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return null;
         }
 
-        // Address object of the first Address in the address list
-        Address location = address.get(0);
+        if(address.size() == 0) {
+            return null;
+        } else {
+            // Address object of the first Address in the address list
+            Address location = address.get(0);
 
-        // create LatLng object with the locations coordinates to return
-        LatLng place = new LatLng(location.getLatitude(), location.getLongitude());
+            // create LatLng object with the locations coordinates to return
+            LatLng place = new LatLng(location.getLatitude(), location.getLongitude());
 
-        // return latitude and longitude of the streetAddress parameter
-        return place;
-
+            // return latitude and longitude of the streetAddress parameter
+            return place;
+        }
 
     }
 }

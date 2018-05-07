@@ -1,3 +1,6 @@
+// Michael Butera
+// Tom Spencer
+
 package term_project.android.wku.edu.akari;
 
 import android.content.Intent;
@@ -49,6 +52,7 @@ public class StartTenency extends AppCompatActivity {
         contractDate = findViewById(R.id.contractDate);
         progressBar = findViewById(R.id.progressBar2);
 
+        // call asynctask, this populates radio group with properties the user owns
         new GetPropertyTenency().execute(userEmail);
 
         rental = findViewById(R.id.rental);
@@ -224,8 +228,6 @@ public class StartTenency extends AppCompatActivity {
                 rental.setVisibility(View.VISIBLE);
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
             }
-
-
 
         }
 

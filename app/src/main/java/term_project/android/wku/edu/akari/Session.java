@@ -1,3 +1,6 @@
+// Michael Butera
+// Tom Spencer
+
 package term_project.android.wku.edu.akari;
 
 import android.content.Context;

@@ -1,3 +1,6 @@
+// Michael Butera
+// Tom Spencer
+
 package term_project.android.wku.edu.akari;
 
 import android.content.Intent;
@@ -37,15 +40,18 @@ public class AddPictureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_picture);
+        getSupportActionBar().setTitle("Add Image");
 
         takePic = findViewById(R.id.takePic);
         upload = findViewById(R.id.upload);
         image = findViewById(R.id.image1);
 
+        // get extras from post property intent
         userID = getIntent().getStringExtra("userID");
         propID = getIntent().getStringExtra("propertyID");
 
 
+        // bring up camera when button is clicked
         takePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +64,7 @@ public class AddPictureActivity extends AppCompatActivity {
 
     }
 
+    // called when upload is clicked
     public void upload(View view) {
         // if bitmap is null, picture was not taken
         // else, convert image to byte array and then get the string base64 version of the byte array to send to the server

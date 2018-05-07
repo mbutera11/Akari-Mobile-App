@@ -1,3 +1,6 @@
+// Michael Butera
+// Tom Spencer
+
 package term_project.android.wku.edu.akari;
 
 import android.content.Intent;
@@ -28,6 +31,7 @@ public class Profile extends AppCompatActivity {
 
         s = new Session(getApplicationContext());
 
+        // initialize views
         firstName = findViewById(R.id.firstName);
         firstName.setText(s.getFirstName());
         lastName = findViewById(R.id.lastName);
@@ -41,6 +45,7 @@ public class Profile extends AppCompatActivity {
         startTenency = findViewById(R.id.tenency);
         rentedProperty = findViewById(R.id.rentedProperties);
 
+        // set onclick listeners for each button on profile
         properties.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +55,7 @@ public class Profile extends AppCompatActivity {
         postProperty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, PostProperty.class));
+                startActivity(new Intent(Profile.this, postProperty.class));
             }
         });
         startTenency.setOnClickListener(new View.OnClickListener() {

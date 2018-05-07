@@ -1,8 +1,14 @@
-// used to create a custom list item in the list view when viewing properties (Listings.java)
+// Michael Butera
+// Tom Spencer
 
+// used to create a custom list item in the list view when viewing properties (Listings.java)
 package term_project.android.wku.edu.akari;
 
 import android.app.Activity;
+import android.util.Base64;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +27,7 @@ public class ListingListAdapter extends ArrayAdapter{
     private final Activity context;
 
     //to store the property images
-    private final Integer[] imageIDarray;
+    private final String[] imageArray;
 
     private final String[] priceArray;
     private final String[] numBedArray;
@@ -30,10 +36,11 @@ public class ListingListAdapter extends ArrayAdapter{
     private final String[] stateArray;
     private final String[] zipArray;
 
-    public ListingListAdapter(Activity context, Integer[] imageIDarray, String[] priceArray, String[] numBedArray, String[] addressArray, String[] cityArray, String[] stateArray, String[] zipArray) {
+    // all information that will be in a customer list item for displaying properties
+    public ListingListAdapter(Activity context, String[] imageArray, String[] priceArray, String[] numBedArray, String[] addressArray, String[] cityArray, String[] stateArray, String[] zipArray) {
         super(context,R.layout.listing_row , priceArray);
         this.context = context;
-        this.imageIDarray = imageIDarray;
+        this.imageArray = imageArray;
         this.priceArray = priceArray;
         this.numBedArray = numBedArray;
         this.addressArray = addressArray;
@@ -42,29 +49,39 @@ public class ListingListAdapter extends ArrayAdapter{
         this.zipArray = zipArray;
     }
 
+    // for each list item, set all content, textviews, and imageviews
     public View getView(int position, View view, ViewGroup parent) {
 
+        // get row
         LayoutInflater inflater=context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.listing_row, null,true);
 
+        // initialize textviews and imageview
         TextView priceText = rowView.findViewById(R.id.price);
         TextView streetText = rowView.findViewById(R.id.street);
         TextView numBedText = rowView.findViewById(R.id.numBedrooms);
         TextView locationText = rowView.findViewById(R.id.location);
         ImageView imageView = rowView.findViewById(R.id.imageView1);
 
+        // set text views and imageviews
         priceText.setText("$" + priceArray[position]);
         numBedText.setText(numBedArray[position] + " Bedrooms");
         streetText.setText(addressArray[position]);
         locationText.setText(cityArray[position] + ", " + stateArray[position] + " " + zipArray[position]);
 
-        // used for testing
+        // if image array at row is |, there is no image, set default
+        // else, convert base64 to byte[], then to bitmap and then set imageview to bitmap
+        if(imageArray[position].equals("|")) {
+            imageView.setImageResource(R.drawable.noimage);
+        } else {
+            byte[] decodedPic = Base64.decode(imageArray[position], Base64.DEFAULT);
+            Bitmap bmp = BitmapFactory.decodeByteArray(decodedPic, 0, decodedPic.length);
+            imageView.setImageBitmap(bmp);
+        }
 
-        //imageView.setImageResource(imageIDarray[position]);
-        imageView.setImageResource(R.drawable.noimage);
 
         return rowView;
 
-    };
+    }
 
 }

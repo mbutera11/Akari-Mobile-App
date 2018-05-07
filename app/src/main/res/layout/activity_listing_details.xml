@@ -216,62 +216,6 @@
                     android:text="Number of Bathrooms" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/contact"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView22"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Contact Owner"
-                    android:textSize="18sp"
-                    android:layout_marginTop="35dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Enter Subject:"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/subject"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Enter Subject"
-                    android:inputType="textPersonName"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/textView24"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Enter Comment:"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/comment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Enter Comment"
-                    android:inputType="textMultiLine"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/commentSubmit"
-                    android:layout_width="185dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="Submit" />
-            </LinearLayout>
-
         </LinearLayout>
 
     </ScrollView>

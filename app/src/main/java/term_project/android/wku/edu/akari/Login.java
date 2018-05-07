@@ -1,3 +1,6 @@
+// Michael Butera
+// Tom Spencer
+
 package term_project.android.wku.edu.akari;
 
 import android.content.Context;
@@ -72,6 +75,7 @@ public class Login extends AppCompatActivity {
             this.context = context;
         }
 
+        // show progress bar
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
 
@@ -84,9 +88,6 @@ public class Login extends AppCompatActivity {
                 // get email and password from when it is executed in the login method
                 String email = arg0[0];
                 String password = arg0[1];
-
-                // link to local script
-                //String link = "http://10.0.1.38/Code/Mobile_App_Scripts/loginMobile.php";
 
                 // link to script on server
                 String link = "http://akari.alsolaim.com/Mobile_App_Scripts/loginMobile.php";

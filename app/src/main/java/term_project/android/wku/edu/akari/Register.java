@@ -1,3 +1,6 @@
+// Michael Butera
+// Tom Spencer
+
 package term_project.android.wku.edu.akari;
 
 import android.content.Context;
@@ -40,6 +43,7 @@ public class Register extends AppCompatActivity {
         getSupportActionBar().setTitle("Register");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // initialize all views
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         email = findViewById(R.id.email);
@@ -113,9 +117,6 @@ public class Register extends AppCompatActivity {
                 String email = arg0[2];
                 String phone = arg0[3];
                 String password = arg0[4];
-
-                // link to local script
-                //String link = "http://10.0.1.38/Code/Mobile_App_Scripts/registerMobile.php";
 
                 // link to script on server
                 String link = "http://akari.alsolaim.com/Mobile_App_Scripts/registerMobile.php";

@@ -1,3 +1,6 @@
+// Michael Butera
+// Tom Spencer
+
 package term_project.android.wku.edu.akari;
 
 import android.content.Intent;
@@ -19,7 +22,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-public class PostProperty extends AppCompatActivity {
+public class postProperty extends AppCompatActivity {
 
     protected EditText propName;
     protected EditText country;
@@ -52,6 +55,7 @@ public class PostProperty extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Post a Property");
 
+        // initialize all textviews
         propName = findViewById(R.id.propertyName);
         country = findViewById(R.id.country);
         street = findViewById(R.id.street);
@@ -75,13 +79,17 @@ public class PostProperty extends AppCompatActivity {
         s = new Session(getApplicationContext());
 
 
-        // execute appropriate tasks when butotn is clicked
+        // execute appropriate tasks when button is clicked
         registerProperty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // get radio button values
                 int propTypeID = propType.getCheckedRadioButtonId();
                 int leaseTermID = leaseTerm.getCheckedRadioButtonId();
 
+                // make sure all input was given
+                // if any are empty, toast message
+                // else, continue with adding property
                 if(propName.getText().toString().equals("") ||  country.getText().toString().equals("") || street.getText().toString().equals("") || city.getText().toString().equals("") ||
                         state.getText().toString().equals("") || zip.getText().toString().equals("") || size.getText().toString().equals("") || numBed.getText().toString().equals("") || numBath.getText().toString().equals("") ||
                         description.getText().toString().equals("") || price.getText().toString().equals("") || availability.getText().toString().equals("") || construction.getText().toString().equals("") ||
@@ -117,6 +125,7 @@ public class PostProperty extends AppCompatActivity {
 
 
             try {
+                // get all items passed to class
                 String propName = strings[0];
                 String country = strings[1];
                 String street = strings[2];
@@ -135,6 +144,7 @@ public class PostProperty extends AppCompatActivity {
                 String leaseTerm = strings[15];
 
 
+                // get email from session
                 String email = s.getEmail();
 
                 // link to script on server
@@ -193,6 +203,10 @@ public class PostProperty extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
 
+            // checks output from server
+            // if output is FAIL, the property did not get inserted, toast message
+            // if output is Failed to connect, there was a problem with the database
+            // else, it was successful, send user id and property id to add picture activity so the user can upload an image
             if(s.equals("FAIL")) {
                 Toast.makeText(getApplicationContext(), "Property was not inserted. Try again.", Toast.LENGTH_LONG).show();
             } else if(s.equals("Failed to connect")) {
@@ -200,6 +214,7 @@ public class PostProperty extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), "Property was inserted. Add a picture", Toast.LENGTH_LONG).show();
                 Intent in = new Intent(getApplicationContext(), AddPictureActivity.class);
+                // server output userid and propertyid separated by a comma
                 String[] propUserID = s.split(",");
 
                 // send user and property id from server to next activity

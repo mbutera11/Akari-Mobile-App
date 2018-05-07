@@ -1,12 +1,19 @@
+// Michael Butera
+// Tom Spencer
+
 package term_project.android.wku.edu.akari;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +28,7 @@ import java.util.ArrayList;
 public class ListingDetails extends AppCompatActivity {
 
     protected TextView ad1, ad2, pr1, pr2, de, pro, ty, av, con, csz, coun, si, bed, bath;
+    protected ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,8 @@ public class ListingDetails extends AppCompatActivity {
         bed = findViewById(R.id.numBeds);
         bath = findViewById(R.id.numBath);
 
-
+        // initialize imageview
+        imageView = findViewById(R.id.detailImage);
 
         // execute AsyncTask
         new ListingDetailAction().execute(propertyID);
@@ -77,16 +86,15 @@ public class ListingDetails extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     // sets all text views on the page with all the information from the server
     // called during postExecute of AsyncTask
     protected void setTextViews(String address, String price, String description, String problems,
                                 String type, String available, String construction, String cityStateZip,
-                                String country, String size, String bedrooms, String bathrooms) {
+                                String country, String size, String bedrooms, String bathrooms, String imageString) {
 
+        // set text views
         ad1.setText(address);
         ad2.setText(address);
         pr1.setText(price);
@@ -102,8 +110,21 @@ public class ListingDetails extends AppCompatActivity {
         bed.append(": " + bedrooms);
         bath.append(": " + bathrooms);
 
+        // set image from server
+        // if the string is |, that means no image for that property, set to default noImage
+        // else, convert base64 string to byte array, then to bitmap, then set image view to bitmap
+        if(imageString.equals("|")) {
+            imageView.setImageResource(R.drawable.noimage);
+        } else {
+            byte[] decodedPic = Base64.decode(imageString, Base64.DEFAULT);
+            Bitmap bmp = BitmapFactory.decodeByteArray(decodedPic, 0, decodedPic.length);
+            imageView.setImageBitmap(bmp);
+        }
+
+
     }
 
+    // handles server interaction
     private class ListingDetailAction extends AsyncTask<String, Integer, ArrayList<String>> {
 
         @Override
@@ -116,12 +137,8 @@ public class ListingDetails extends AppCompatActivity {
                 // link to script on server
                 String link = "http://akari.alsolaim.com/Mobile_App_Scripts/getListingDetailsMobile.php";
 
-                // link to local script
-                //String link = "http://10.0.1.38/Code/Mobile_App_Scripts/getListingDetailsMobile.php";
-
-                // encode the propertyID to pass to the script via POSt
+                // encode the propertyID to pass to the script via POST
                 String data  = URLEncoder.encode("propertyID", "UTF-8") + "=" + URLEncoder.encode(propID, "UTF-8");
-
 
                 // create a URL with the link
                 URL url = new URL(link);
@@ -135,7 +152,6 @@ public class ListingDetails extends AppCompatActivity {
 
                 // will read information received from the server
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
 
                 String line;
                 // Read Server Response and add to array list
@@ -156,7 +172,7 @@ public class ListingDetails extends AppCompatActivity {
         protected void onPostExecute(ArrayList<String> strings) {
             super.onPostExecute(strings);
             
-            // get string from array list and split it by colon
+            // get string from array list and split it by ~
             String info = strings.get(0);
 
             // if list is null, there is a connection issue
@@ -164,7 +180,7 @@ public class ListingDetails extends AppCompatActivity {
             if(info == null) {
                 Toast.makeText(getApplicationContext(), "Failed to connect. Check internet connection", Toast.LENGTH_LONG).show();
             } else {
-                String[] propertyInfo = info.split(":");
+                String[] propertyInfo = info.split("~");
 
                 // set variable to corresponding index from server response
                 String address = propertyInfo[4];
@@ -179,9 +195,10 @@ public class ListingDetails extends AppCompatActivity {
                 String size = propertyInfo[9];
                 String bedrooms = propertyInfo[10];
                 String bathrooms = propertyInfo[11];
+                String imageString = propertyInfo[22];
 
                 // call this method to set all text views in the page with info gathered from string array
-                setTextViews(address, price, description, problems, type, available, construction, cityStateZip, country, size, bedrooms, bathrooms);
+                setTextViews(address, price, description, problems, type, available, construction, cityStateZip, country, size, bedrooms, bathrooms, imageString);
             }
 
         }
