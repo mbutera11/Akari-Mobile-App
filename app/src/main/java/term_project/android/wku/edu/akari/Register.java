@@ -169,6 +169,8 @@ public class Register extends AppCompatActivity {
             // if first element in array is an exception, no internet connection toast message
             if(allInfo[0].equals("Exception: Unable to resolve host \"akari.alsolaim.com\": No address associated with hostname")) {
                 Toast.makeText(getApplicationContext(), "No Connection. Check internet connection", Toast.LENGTH_LONG).show();
+            } else if(allInfo[0].equals("Username already exists")) {
+                Toast.makeText(getApplicationContext(), "Email already exists", Toast.LENGTH_LONG).show();
             } else {
                 s = new Session(getApplicationContext());
                 s.setFirstName(allInfo[0]);
