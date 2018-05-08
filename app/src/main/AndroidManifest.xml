@@ -22,17 +22,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Listings" />
-        <activity android:name=".Properties" />
-        <activity android:name=".Profile" />
+        <activity android:name=".Listings"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Properties"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Profile"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Login"
+            android:screenOrientation="portrait"
             android:noHistory="true" />
         <activity
             android:name=".Register"
+            android:screenOrientation="portrait"
             android:noHistory="true" />
-        <activity android:name=".ListingDetails" />
-        <activity android:name=".postProperty" />
+        <activity android:name=".ListingDetails"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".postProperty"
+            android:screenOrientation="portrait"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -47,11 +54,15 @@
 
         <activity
             android:name=".MapsActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".AddPictureActivity" />
-        <activity android:name=".StartTenency" />
+        <activity android:name=".AddPictureActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".StartTenency"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HomePage"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_home_page"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
